@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air Quality Monitoring Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridstack/dist/gridstack.min.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <h1>Air Quality Monitoring Dashboard</h1>
+    <p>Real-time monitoring of air quality data</p>
+  </header>
+
+  <!-- Theme Toggle -->
+  <button id="themeToggle" class="theme-toggle">Toggle Theme</button>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a class="nav-brand" href="#">AQI Dashboard</a>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#data">Data</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content Section -->
+  <div class="container">
+    <!-- Cards Section -->
+    <section id="dashboard" class="cards-section">
+      <div class="card">
+        <div class="card-header" id="temperature-status"></div>
+        <div class="card-body">
+          <h5>Temperature</h5>
+          <p id="temperature">Loading...</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="humidity-status"></div>
+        <div class="card-body">
+          <h5>Humidity</h5>
+          <p id="humidity">Loading...</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="nox-status"></div>
+        <div class="card-body">
+          <h5>NOx</h5>
+          <p id="nox">Loading...</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="nh3-status"></div>
+        <div class="card-body">
+          <h5>NH3</h5>
+          <p id="nh3">Loading...</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="so2-status"></div>
+        <div class="card-body">
+          <h5>SO2</h5>
+          <p id="so2">Loading...</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="voc-status"></div>
+        <div class="card-body">
+          <h5>VOC</h5>
+          <p id="voc">Loading...</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="co2-status"></div>
+        <div class="card-body">
+          <h5>CO2</h5>
+          <p id="co2">Loading...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location Selector -->
+    <div id="locationSelector" class="location-selector">
+      <label for="citySelect">Choose a city:</label>
+      <select id="citySelect">
+        <option value="seoul">Seoul</option>
+        <option value="busan">Busan</option>
+        <option value="daegu">Daegu</option>
+        <option value="jeju">Jeju</option>
+        <option value="incheon">Incheon</option>
+      </select>
+    </div>
+
+    <!-- Map Section -->
+    <section id="mapSection" class="map-section">
+      <h2>Air Quality Map</h2>
+      <div id="map" class="map-container"></div>
+    </section>
+
+    <!-- Charts Section -->
+    <section class="charts-section">
+      <h2>Air Quality Trends</h2>
+      <canvas id="lineChart"></canvas>
+      <canvas id="barChart" class="chart"></canvas>
+      <canvas id="doughnutChart" class="chart"></canvas>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2024 Air Quality Dashboard. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gridstack/dist/gridstack.all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
