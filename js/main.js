@@ -50,7 +50,14 @@ async function fetchData(lat, lon) {
 function updateUI(data) {
   if (data) {
     // Update AQI card
-    document.querySelector('.card-header').textContent = getAQIStatus(data.aqi);
+    const aqiElement = document.getElementById('aqi-status');
+    aqiElement.textContent = getAQIStatus(data.aqi);
+    aqiElement.className = ''; // Clear existing classes
+    if (data.aqi <= 2) aqiElement.classList.add('good');
+    else if (data.aqi === 3) aqiElement.classList.add('moderate');
+    else aqiElement.classList.add('unhealthy');
+
+    document.getElementById('aqi-value').textContent = data.aqi;
 
     // Update temperature and humidity
     document.getElementById('temperature').textContent = `${data.temperature} °C`;
@@ -63,7 +70,7 @@ function updateUI(data) {
     document.getElementById('voc').textContent = `${data.voc} ppb`;
     document.getElementById('co2').textContent = `${data.co2} ppm`;
 
-    // Update charts with the new data (Bar and Doughnut charts as an example)
+    // Update charts with the new data
     updateCharts(data);
   }
 }
@@ -78,13 +85,49 @@ function getAQIStatus(aqi) {
   return 'N/A';
 }
 
+// Initialize charts
+const barChart = new Chart(document.getElementById('barChart').getContext('2d'), {
+  type: 'bar',
+  data: {
+    labels: ['NOx', 'NH3', 'SO2', 'VOC', 'CO2'],
+    datasets: [{
+      label: 'Pollutants Level (ppb/ppm)',
+      data: [0, 0, 0, 0, 0], // Initial placeholder values
+      backgroundColor: ['#4CAF50', '#FFEB3B', '#F44336', '#2196F3', '#9C27B0'],
+    }]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+      }
+    }
+  }
+});
+
+const doughnutChart = new Chart(document.getElementById('doughnutChart').getContext('2d'), {
+  type: 'doughnut',
+  data: {
+    labels: ['NOx', 'NH3', 'SO2', 'VOC'],
+    datasets: [{
+      label: 'Pollutants Contribution',
+      data: [0, 0, 0, 0],
+      backgroundColor: ['#4CAF50', '#FFEB3B', '#F44336', '#2196F3'],
+    }]
+  },
+  options: {
+    responsive: true,
+  }
+});
+
 // Function to update the charts with new data
 function updateCharts(data) {
-  // Update Bar Chart with current pollutant levels
+  // Bar chart data update
   barChart.data.datasets[0].data = [data.nox, data.nh3, data.so2, data.voc, data.co2];
   barChart.update();
 
-  // Update Doughnut Chart
+  // Doughnut chart data update
   doughnutChart.data.datasets[0].data = [data.nox, data.nh3, data.so2, data.voc];
   doughnutChart.update();
 }
@@ -106,6 +149,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // Initial marker for Seoul
 let marker = L.marker([37.5665, 126.9780]).addTo(map);
 
+// Function to update the map
+function updateMap(cityKey) {
+  const city = cities[cityKey];
+  map.setView([city.lat, city.lng], 12);
+  marker.setLatLng([city.lat, city.lng]);
+}
+
 // Event listener for dropdown menu
 document.getElementById('citySelect').addEventListener('change', (e) => {
   const selectedCity = e.target.value;
@@ -114,17 +164,3 @@ document.getElementById('citySelect').addEventListener('change', (e) => {
 
 // Initialize with Seoul data
 updateCityData('seoul');
-// Navigation buttons
-document.getElementById('homeButton').addEventListener('click', () => navigateTo('homeSection'));
-document.getElementById('dataButton').addEventListener('click', () => navigateTo('dataSection'));
-document.getElementById('aboutButton').addEventListener('click', () => navigateTo('aboutSection'));
-
-function navigateTo(sectionId) {
-  // Hide all sections
-  document.querySelectorAll('main > section').forEach(section => {
-    section.classList.remove('active-section');
-  });
-
-  // Show selected section
-  document.getElementById(sectionId).classList.add('active-section');
-}

@@ -15,16 +15,14 @@
     <p>Real-time monitoring of air quality data</p>
   </header>
 
-  <!-- Theme Toggle -->
-  <button id="themeToggle" class="theme-toggle">Toggle Theme</button>
-
   <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="nav-container">
       <a class="nav-brand" href="#">AQI Dashboard</a>
       <ul class="nav-links">
         <li><a href="#">Home</a></li>
-        <li><a href="#data">Data</a></li>
+        <li><a href="#dashboard">Data</a></li>
+        <li><a href="#mapSection">Map</a></li>
         <li><a href="#about">About</a></li>
       </ul>
     </div>
@@ -34,53 +32,67 @@
   <div class="container">
     <!-- Cards Section -->
     <section id="dashboard" class="cards-section">
+      <!-- Temperature Card -->
       <div class="card">
-        <div class="card-header" id="temperature-status"></div>
+        <div class="card-header" id="temperature-status">Temperature</div>
         <div class="card-body">
           <h5>Temperature</h5>
           <p id="temperature">Loading...</p>
         </div>
       </div>
+      <!-- Humidity Card -->
       <div class="card">
-        <div class="card-header" id="humidity-status"></div>
+        <div class="card-header" id="humidity-status">Humidity</div>
         <div class="card-body">
           <h5>Humidity</h5>
           <p id="humidity">Loading...</p>
         </div>
       </div>
+      <!-- NOx Card -->
       <div class="card">
-        <div class="card-header" id="nox-status"></div>
+        <div class="card-header" id="nox-status">NOx</div>
         <div class="card-body">
           <h5>NOx</h5>
           <p id="nox">Loading...</p>
         </div>
       </div>
+      <!-- NH3 Card -->
       <div class="card">
-        <div class="card-header" id="nh3-status"></div>
+        <div class="card-header" id="nh3-status">NH3</div>
         <div class="card-body">
           <h5>NH3</h5>
           <p id="nh3">Loading...</p>
         </div>
       </div>
+      <!-- SO2 Card -->
       <div class="card">
-        <div class="card-header" id="so2-status"></div>
+        <div class="card-header" id="so2-status">SO2</div>
         <div class="card-body">
           <h5>SO2</h5>
           <p id="so2">Loading...</p>
         </div>
       </div>
+      <!-- VOC Card -->
       <div class="card">
-        <div class="card-header" id="voc-status"></div>
+        <div class="card-header" id="voc-status">VOC</div>
         <div class="card-body">
           <h5>VOC</h5>
           <p id="voc">Loading...</p>
         </div>
       </div>
+      <!-- CO2 Card -->
       <div class="card">
-        <div class="card-header" id="co2-status"></div>
+        <div class="card-header" id="co2-status">CO2</div>
         <div class="card-body">
           <h5>CO2</h5>
           <p id="co2">Loading...</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="aqi-status">Loading...</div>
+        <div class="card-body">
+          <h5>Air Quality Index (AQI)</h5>
+          <p id="aqi-value">Loading...</p>
         </div>
       </div>
     </section>
@@ -119,7 +131,6 @@
 
   <!-- Scripts -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gridstack/dist/gridstack.all.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>

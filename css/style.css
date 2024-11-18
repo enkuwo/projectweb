@@ -125,20 +125,24 @@ body {
     cursor: pointer;
     margin: 20px;
   }
+  #aqi-status {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .good {
+    color: #4CAF50;
+  }
+  
+  .moderate {
+    color: #FFEB3B;
+  }
+  
+  .unhealthy {
+    color: #F44336;
+  }
   
   .theme-toggle:hover {
     background-color: #45a049;
   }
-  /* Hide all sections except the active one */
-section {
-  display: none;
-}
-
-.active-section {
-  display: block;
-}
-
-/* Adjust navbar styles if needed */
-.navbar a {
-  cursor: pointer;
-}
