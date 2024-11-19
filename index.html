@@ -32,7 +32,7 @@
   <div class="container">
     <!-- Cards Section -->
     <section id="dashboard" class="cards-section">
-      <!-- Temperature Card -->
+      <!-- Cards -->
       <div class="card">
         <div class="card-header" id="temperature-status">Temperature</div>
         <div class="card-body">
@@ -40,7 +40,6 @@
           <p id="temperature">Loading...</p>
         </div>
       </div>
-      <!-- Humidity Card -->
       <div class="card">
         <div class="card-header" id="humidity-status">Humidity</div>
         <div class="card-body">
@@ -48,7 +47,6 @@
           <p id="humidity">Loading...</p>
         </div>
       </div>
-      <!-- NOx Card -->
       <div class="card">
         <div class="card-header" id="nox-status">NOx</div>
         <div class="card-body">
@@ -56,7 +54,6 @@
           <p id="nox">Loading...</p>
         </div>
       </div>
-      <!-- NH3 Card -->
       <div class="card">
         <div class="card-header" id="nh3-status">NH3</div>
         <div class="card-body">
@@ -64,7 +61,6 @@
           <p id="nh3">Loading...</p>
         </div>
       </div>
-      <!-- SO2 Card -->
       <div class="card">
         <div class="card-header" id="so2-status">SO2</div>
         <div class="card-body">
@@ -72,7 +68,6 @@
           <p id="so2">Loading...</p>
         </div>
       </div>
-      <!-- VOC Card -->
       <div class="card">
         <div class="card-header" id="voc-status">VOC</div>
         <div class="card-body">
@@ -80,7 +75,6 @@
           <p id="voc">Loading...</p>
         </div>
       </div>
-      <!-- CO2 Card -->
       <div class="card">
         <div class="card-header" id="co2-status">CO2</div>
         <div class="card-body">
@@ -118,9 +112,12 @@
     <!-- Charts Section -->
     <section class="charts-section">
       <h2>Air Quality Trends</h2>
-      <canvas id="lineChart"></canvas>
-      <canvas id="barChart" class="chart"></canvas>
-      <canvas id="doughnutChart" class="chart"></canvas>
+      <div id="barChartContainer" class="chart-container">
+        <canvas id="barChart"></canvas>
+      </div>
+      <div id="doughnutChartContainer" class="chart-container">
+        <canvas id="doughnutChart"></canvas>
+      </div>
     </section>
   </div>
 

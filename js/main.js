@@ -15,10 +15,12 @@ const weatherUrl = 'https://api.openweathermap.org/data/2.5/weather';
 // Function to fetch AQI and weather data for a city
 async function fetchData(lat, lon) {
   try {
-    const airQualityResponse = await fetch(`${baseUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}`);
-    const airQualityData = await airQualityResponse.json();
+    const [airQualityResponse, weatherResponse] = await Promise.all([
+      fetch(`${baseUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}`),
+      fetch(`${weatherUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
+    ]);
 
-    const weatherResponse = await fetch(`${weatherUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
+    const airQualityData = await airQualityResponse.json();
     const weatherData = await weatherResponse.json();
 
     const aqi = airQualityData.list[0].main.aqi;
@@ -30,18 +32,10 @@ async function fetchData(lat, lon) {
     const voc = airQualityData.list[0].components.voc;
     const co2 = airQualityData.list[0].components.co;
 
-    return {
-      aqi,
-      temperature,
-      humidity,
-      nox,
-      nh3,
-      so2,
-      voc,
-      co2,
-    };
+    return { aqi, temperature, humidity, nox, nh3, so2, voc, co2 };
   } catch (error) {
     console.error('Error fetching data:', error);
+    alert('Failed to fetch data. Please try again later.');
     return null; // Return null if API call fails
   }
 }
@@ -64,25 +58,24 @@ function updateUI(data) {
     document.getElementById('humidity').textContent = `${data.humidity} %`;
 
     // Update pollutant levels
-    document.getElementById('nox').textContent = `${data.nox} ppb`;
-    document.getElementById('nh3').textContent = `${data.nh3} ppb`;
-    document.getElementById('so2').textContent = `${data.so2} ppb`;
-    document.getElementById('voc').textContent = `${data.voc} ppb`;
-    document.getElementById('co2').textContent = `${data.co2} ppm`;
+    document.getElementById('nox').textContent = `${data.nox || 0} ppb`;
+    document.getElementById('nh3').textContent = `${data.nh3 || 0} ppb`;
+    document.getElementById('so2').textContent = `${data.so2 || 0} ppb`;
+    document.getElementById('voc').textContent = `${data.voc || 0} ppb`;
+    document.getElementById('co2').textContent = `${data.co2 || 0} ppm`;
 
     // Update charts with the new data
     updateCharts(data);
+  } else {
+    // Show error message on UI
+    document.getElementById('aqi-status').textContent = 'Error fetching data';
   }
 }
 
 // Function to get AQI status based on the value
 function getAQIStatus(aqi) {
-  if (aqi === 1) return 'Good';
-  if (aqi === 2) return 'Fair';
-  if (aqi === 3) return 'Moderate';
-  if (aqi === 4) return 'Poor';
-  if (aqi === 5) return 'Very Poor';
-  return 'N/A';
+  const statuses = ['Good', 'Fair', 'Moderate', 'Poor', 'Very Poor'];
+  return statuses[aqi - 1] || 'N/A';
 }
 
 // Initialize charts
@@ -99,9 +92,7 @@ const barChart = new Chart(document.getElementById('barChart').getContext('2d'),
   options: {
     responsive: true,
     scales: {
-      y: {
-        beginAtZero: true,
-      }
+      y: { beginAtZero: true }
     }
   }
 });
@@ -116,18 +107,14 @@ const doughnutChart = new Chart(document.getElementById('doughnutChart').getCont
       backgroundColor: ['#4CAF50', '#FFEB3B', '#F44336', '#2196F3'],
     }]
   },
-  options: {
-    responsive: true,
-  }
+  options: { responsive: true }
 });
 
 // Function to update the charts with new data
 function updateCharts(data) {
-  // Bar chart data update
   barChart.data.datasets[0].data = [data.nox, data.nh3, data.so2, data.voc, data.co2];
   barChart.update();
 
-  // Doughnut chart data update
   doughnutChart.data.datasets[0].data = [data.nox, data.nh3, data.so2, data.voc];
   doughnutChart.update();
 }
