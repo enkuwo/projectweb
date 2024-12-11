@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air Quality Monitoring Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/chat.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridstack/dist/gridstack.min.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <h1>Air Quality Monitoring Dashboard</h1>
+  </header>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>AQI Dashboard</h2>
+    </div>
+    <ul class="sidebar-nav">
+      <li><a href="#dashboard" class="active">Dashboard</a></li>
+      <li><a href="compare.html" class="compare-link">Compare Locations</a></li>
+      <li><a href="weather.html" class="weather-link">Forecast</a></li>
+    </ul>
+  </aside>
+    <button class="toggle-button" id="toggleSidebar">☰</button>
+
+  </nav>
+      <!-- Location Selector -->
+      <div id="locationSelector" class="searchbar">
+        <input type="text" id="citySearch" placeholder="Search for a city">
+      </div>
+      <ul id="suggestions" class="suggestions-list"></ul>
+      <button id="chooseButton" class="choose-button">Choose Location</button>
+      <p id="selectedCity" style="text-align: center; font-size: 1.2em; margin-top: 10px;"> </p>
+      <section id="mapSection" class="map-section">
+        <h2 align=center>Air Quality Map</h2>
+        <div id="map" class="map-container"></div>
+       
+      </section>
+  
+  <!-- Main Content Section -->
+  <div class="container">
+    <!-- Cards Section -->
+    <section id="dashboard" class="cards-section">
+      <!-- Cards -->
+      <div class="card">
+        <div class="card-header" id="temperature-status">Temperature</div>
+        <div class="card-body">
+          <h5>Temperature</h5>
+          <p id="temperature">Loading...</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="humidity-status">Humidity</div>
+        <div class="card-body">
+          <h5>Humidity</h5>
+          <p id="humidity">Loading...</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="nox-status">NOx</div>
+        <div class="card-body">
+          <h5>NOx</h5>
+          <p id="nox">Loading...</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="nh3-status">NH3</div>
+        <div class="card-body">
+          <h5>NH3</h5>
+          <p id="nh3">Loading...</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="so2-status">SO2</div>
+        <div class="card-body">
+          <h5>SO2</h5>
+          <p id="so2">Loading...</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="voc-status">VOC</div>
+        <div class="card-body">
+          <h5>VOC</h5>
+          <p id="voc">Loading...</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="co2-status">CO2</div>
+        <div class="card-body">
+          <h5>CO2</h5>
+          <p id="co2">Loading...</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="aqi-status">Loading...</div>
+        <div class="card-body">
+          <h5>Air Quality Index (AQI)</h5>
+          <p id="aqi-value">Loading...</p>
+        </div>
+      </div>
+    </section>
+    <!-- Charts Section -->
+    <section class="charts-section">
+      <h2>Air Quality Trends</h2>
+      <div id="barChartContainer" class="chart-container">
+        <canvas id="barChart"></canvas>
+      </div>
+      <div id="doughnutChartContainer" class="chart-container">
+        <canvas id="doughnutChart"></canvas>
+
+      </div>
+    </section>
+    <section id="charts" class="charts-section">
+      <!-- Time-Series Chart -->
+      <div id="timeSeriesChartContainer">
+        <h3>Time-Series Trend (AQI)</h3>
+        <div id="timeSeriesChart" class="chart"></div>
+      </div>
+  
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2024 Air Quality Dashboard. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gridstack/dist/gridstack.all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script>
+  window.embeddedChatbotConfig = {
+  chatbotId: "dxtVOHq1B6kROYZnaNHgj",
+  domain: "www.chatbase.co"
+  }
+  </script>
+  <script
+  src="https://www.chatbase.co/embed.min.js"
+  chatbotId="dxtVOHq1B6kROYZnaNHgj"
+  domain="www.chatbase.co"
+  defer>
+  </script>
+</body>
+</html>
